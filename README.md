@@ -6,7 +6,6 @@ A Java RESTful API for money transfers between users accounts
 - Spark Framework for creating microservices(http://sparkjava.com/)
 - H2 in memory database
 - Log4j
-- Jetty Container (for Test and Demo app)
 - Rest Assured(for Testing)
 - Apache Http Client(for Testing)
 
