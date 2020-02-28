@@ -80,11 +80,6 @@ CREATE TABLE User (UserId LONG PRIMARY KEY AUTO_INCREMENT NOT NULL,
 
 CREATE UNIQUE INDEX idx_ue on User(UserName,EmailAddress);
 
-INSERT INTO User (UserName, EmailAddress) VALUES ('yangluo','yangluo@gmail.com');
-INSERT INTO User (UserName, EmailAddress) VALUES ('qinfran','qinfran@gmail.com');
-INSERT INTO User (UserName, EmailAddress) VALUES ('liusisi','liusisi@gmail.com');
-
-
 CREATE TABLE Account (AccountId LONG PRIMARY KEY AUTO_INCREMENT NOT NULL,
 UserId Long,
 Balance DECIMAL(19,4),
