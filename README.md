@@ -3,11 +3,12 @@
 A Java RESTful API for money transfers between users accounts
 
 ### Technologies
-- JAX-RS API
+- Spark Framework for creating microservices(http://sparkjava.com/)
 - H2 in memory database
 - Log4j
 - Jetty Container (for Test and Demo app)
-- Apache HTTP Client
+- Rest Assured(for Testing)
+- Apache Http Client(for Testing)
 
 
 ### How to run
@@ -17,28 +18,27 @@ mvn exec:java
 
 Application starts a jetty server on localhost port 8080 An H2 in memory database initialized with some sample user and account data To view
 
-- http://localhost:8080/user/test1
-- http://localhost:8080/user/test2
-- http://localhost:8080/account/1
-- http://localhost:8080/account/2
+- http://localhost:4567/users/all
+- http://localhost:4567/users/byUserName/test1
+- http://localhost:4567/accounts/all
+- http://localhost:4567/accounts/1
 
 ### Available Services
 
 | HTTP METHOD | PATH | USAGE |
 | -----------| ------ | ------ |
-| GET | /user/{userName} | get user by user name | 
-| GET | /user/all | get all users | 
-| PUT | /user/create | create a new user | 
-| POST | /user/{userId} | update user | 
-| DELETE | /user/{userId} | remove user | 
-| GET | /account/{accountId} | get account by accountId | 
-| GET | /account/all | get all accounts | 
-| GET | /account/{accountId}/balance | get account balance by accountId | 
-| PUT | /account/create | create a new account
-| DELETE | /account/{accountId} | remove account by accountId | 
-| PUT | /account/{accountId}/withdraw/{amount} | withdraw money from account | 
-| PUT | /account/{accountId}/deposit/{amount} | deposit money to account | 
-| POST | /transaction | perform transaction between 2 user accounts | 
+| GET | /users/byUserName/{userName} | get user by user name | 
+| GET | /users/all | get all users | 
+| POST | /users/create | create a new user | 
+| PUT | /update/user/{userId} | update user | 
+| GET | /accounts/{accountId} | get account by accountId | 
+| GET | /accounts/all | get all accounts | 
+| GET | /accounts/balance/{accountId} | get account balance by accountId | 
+| POST | /accounts/create | create a new account
+| DELETE | /delete/{accountId} | remove account by accountId | 
+| PUT | /withdraw/{accountId}/{amount} | withdraw money from account | 
+| PUT | /deposit/{accountId}/{amount} | deposit money to account | 
+| PUT | /transfer | perform fund transfer between 2 user accounts | 
 
 ### Http Status
 - 200 OK: The request has succeeded
@@ -74,9 +74,3 @@ Application starts a jetty server on localhost port 8080 An H2 in memory databas
 }
 ```
 
-
-
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :) 
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/parthsolanki49)
