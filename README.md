@@ -72,4 +72,24 @@ Application starts a jetty server on localhost port 8080 An H2 in memory databas
    "toAccountId":2
 }
 ```
+#### Database Schema:
+```sh
+CREATE TABLE User (UserId LONG PRIMARY KEY AUTO_INCREMENT NOT NULL,
+ UserName VARCHAR(30) NOT NULL,
+ EmailAddress VARCHAR(30) NOT NULL);
 
+CREATE UNIQUE INDEX idx_ue on User(UserName,EmailAddress);
+
+INSERT INTO User (UserName, EmailAddress) VALUES ('yangluo','yangluo@gmail.com');
+INSERT INTO User (UserName, EmailAddress) VALUES ('qinfran','qinfran@gmail.com');
+INSERT INTO User (UserName, EmailAddress) VALUES ('liusisi','liusisi@gmail.com');
+
+
+CREATE TABLE Account (AccountId LONG PRIMARY KEY AUTO_INCREMENT NOT NULL,
+UserId Long,
+Balance DECIMAL(19,4),
+CurrencyCode VARCHAR(30)
+);
+
+CREATE UNIQUE INDEX idx_acc on Account(UserId,CurrencyCode);
+```
