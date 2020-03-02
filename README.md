@@ -1,6 +1,6 @@
 # Money transfer Rest API
 
-A Java RESTful money transfer API between user accounts
+A Java Spark framework RESTful money transfer API between user accounts
 
 ### Technologies
 - Spark Framework for creating microservices(http://sparkjava.com/)
