@@ -57,9 +57,9 @@ Application starts a jetty server on localhost port 8080 An H2 in memory databas
 
 ```sh
 {  
-   "userName":"test1",
+   "userId":1,
    "balance":10.0000,
-   "currencyCode":"GBP"
+   "currencyCode":"USD"
 } 
 ```
 
