@@ -15,7 +15,7 @@ A Java Spark framework RESTful money transfer API between user accounts
 mvn exec:java
 ```
 
-Application starts a jetty server on localhost port 8080 An H2 in memory database initialized with some sample user and account data To view
+Application starts using the Spark microservices framework on localhost port 4567. Once the server is started some of the data is loaded into the H2 in memory database to be able to view using following services
 
 - http://localhost:4567/users/all
 - http://localhost:4567/users/byUserName/test1
