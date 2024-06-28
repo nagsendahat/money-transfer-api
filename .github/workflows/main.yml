@@ -31,7 +31,7 @@ jobs:
         run: |
           while : ; do
             response=$(curl -X GET \
-              https://www.runscope.com/radar/69o51cj6r2ii/0b19cd8a-eaf6-44e9-8c0f-8e41ab513837/results/00de4489-2483-4fb9-a515-b035e1f6be98 \
+              https://www.runscope.com/radar/69o51cj6r2ii/0b19cd8a-eaf6-44e9-8c0f-8e41ab513837 \
               -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
               -H "Content-Type: application/json")
             status=$(echo "$response" | jq -r '.data.result')
