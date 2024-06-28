@@ -9,12 +9,45 @@ jobs:
 
     steps:
       - name: Run Runscope Test
+        id: run_test
         env:
           RUNSCOPE_ACCESS_TOKEN: b27eb225-0b89-414e-9722-0c86d6155108
           BUCKET_KEY: 69o51cj6r2ii
           TEST_ID: b27eb225-0b89-414e-9722-0c86d6155108
         run: |
-          curl -X GET \
-            https://api.runscope.com/radar/2eef4029-2134-4a1c-9c5a-6c5c8adee596/trigger?runscope_environment=b27eb225-0b89-414e-9722-0c86d6155108\
+          response=$(curl -X GET \
+            https://api.runscope.com/radar/2eef4029-2134-4a1c-9c5a-6c5c8adee596/trigger?runscope_environment=b27eb225-0b89-414e-9722-0c86d6155108 \
             -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
-            -H "Content-Type: application/json"
+            -H "Content-Type: application/json")
+          echo "$response"
+          RUN_ID=$(echo "$response" | jq -r '.data.uuid')
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+
+      - name: Wait for Test to Complete
+        env:
+          RUNSCOPE_ACCESS_TOKEN: ${{ secrets.RUNSCOPE_ACCESS_TOKEN }}
+          BUCKET_KEY: ${{ secrets.RUNSCOPE_BUCKET_KEY }}
+          RUN_ID: ${{ env.RUN_ID }}
+        run: |
+          while : ; do
+            response=$(curl -X GET \
+              https://api.runscope.com/radar/2eef4029-2134-4a1c-9c5a-6c5c8adee596/trigger?runscope_environment=b27eb225-0b89-414e-9722-0c86d6155108 \
+              -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
+              -H "Content-Type: application/json")
+            status=$(echo "$response" | jq -r '.data.result')
+            if [[ "$status" != "working" ]]; then
+              echo "Test completed with status: $status"
+              echo "$response"
+              echo "RESPONSE=$response" >> $GITHUB_ENV
+              break
+            fi
+            echo "Waiting for test to complete..."
+            sleep 10
+          done
+
+      - name: Print Test Results
+        env:
+          RESPONSE: ${{ env.RESPONSE }}
+        run: |
+          echo "Test Results:"
+          echo "$RESPONSE" | jq .
