@@ -21,7 +21,7 @@ jobs:
             -H "Content-Type: application/json")
           echo "$response"
           RUN_ID=$(echo "$response" | jq -r '.data.uuid')'
-          echo $RUN_ID
+          echo "$RUN_ID"
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
 
       - name: Wait for Test to Complete
