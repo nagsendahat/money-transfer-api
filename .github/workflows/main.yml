@@ -51,3 +51,17 @@ jobs:
         run: |
           echo "Test Results:"
           echo "$RESPONSE" | jq .
+      - name: Check for Assertion Failures
+        if: steps.wait_test.outputs.RESPONSE
+        run: |
+          status=$(echo "${{ steps.wait_test.outputs.RESPONSE }}" | jq -r '.data.result')
+          failures=$(echo "${{ steps.wait_test.outputs.RESPONSE }}" | jq -r '.data.assertions[] | select(.result == "fail") | .message')
+          if [[ "$status" == "pass" ]]; then
+            echo "All assertions passed."
+          elif [[ "$status" == "fail" ]]; then
+            echo "Test failed. Assertion failures:"
+            echo "$failures"
+            exit 1
+          else
+            echo "Test status: $status"
+          fi          
