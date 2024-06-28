@@ -14,7 +14,7 @@ jobs:
           BUCKET_KEY: 69o51cj6r2ii
           TEST_ID: b27eb225-0b89-414e-9722-0c86d6155108
         run: |
-          curl -X POST \
+          curl -X GET \
             https://api.runscope.com/buckets/$BUCKET_KEY/tests/$TEST_ID/runs \
             -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
             -H "Content-Type: application/json"
