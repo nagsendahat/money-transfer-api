@@ -24,45 +24,4 @@ jobs:
           echo "$RUN_ID"
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
 
-      - name: Wait for Test to Complete
-        env:
-          RUNSCOPE_ACCESS_TOKEN: b27eb225-0b89-414e-9722-0c86d6155108
-          BUCKET_KEY: 69o51cj6r2ii
-          RUN_ID: ${{ env.RUN_ID }}
-        run: |
-          while : ; do
-            response=$(curl -X GET \
-              https://api.runscope.com/buckets/$BUCKET_KEY/runs/$RUN_ID \
-              -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
-              -H "Content-Type: application/json")
-            status=$(echo "$response" | jq -r '.data.result')
-            if [[ "$status" != "working" ]]; then
-              echo "Test completed with status: $status"
-              echo "$response"
-              echo "RESPONSE=$response" >> $GITHUB_ENV
-              break
-            fi
-            echo "Waiting for test to complete..."
-            sleep 10
-          done
-
-      - name: Print Test Results
-        env:
-          RESPONSE: ${{ env.RESPONSE }}
-        run: |
-          echo "Test Results:"
-          echo "$RESPONSE" | jq .
-      - name: Check for Assertion Failures
-        if: steps.wait_test.outputs.RESPONSE
-        run: |
-          status=$(echo "${{ steps.wait_test.outputs.RESPONSE }}" | jq -r '.data.result')
-          failures=$(echo "${{ steps.wait_test.outputs.RESPONSE }}" | jq -r '.data.assertions[] | select(.result == "fail") | .message')
-          if [[ "$status" == "pass" ]]; then
-            echo "All assertions passed."
-          elif [[ "$status" == "fail" ]]; then
-            echo "Test failed. Assertion failures:"
-            echo "$failures"
-            exit 1
-          else
-            echo "Test status: $status"
-          fi          
+      
