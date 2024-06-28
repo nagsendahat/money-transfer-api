@@ -1,0 +1,20 @@
+name: Manually Trigger Runscope Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-runscope-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Runscope Test
+        env:
+          RUNSCOPE_ACCESS_TOKEN: d5bbb08e-bf44-4fb7-a1ec-3b4b7cd20273
+          BUCKET_KEY: 69o51cj6r2ii
+          TEST_ID: b27eb225-0b89-414e-9722-0c86d6155108
+        run: |
+          curl -X POST \
+            https://api.runscope.com/buckets/$BUCKET_KEY/tests/$TEST_ID/runs \
+            -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
+            -H "Content-Type: application/json"
