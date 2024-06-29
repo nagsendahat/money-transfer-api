@@ -1,7 +1,7 @@
 name: Test JS Run
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   run-runscope-test:
