@@ -6,24 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger secondary workflow
-        uses: actions/github-script@v6
-        with:
-          script: >
-            const github = require('@actions/github');
-
-            const { owner, repo } = github.context.repo;
-
-            const workflow_id = 'secondary.yml'; // Name of the secondary
-            workflow file
-
-            const ref = github.context.ref; // Use the current branch reference
-
-            await github.rest.actions.createWorkflowDispatch({
-              owner,
-              repo,
-              workflow_id,
-              ref,
-              inputs: {
-                sample_input: 'sample_value' // Example of passing inputs
-              }
-            });
+        uses: ./.github/workflows/secondary.yml
