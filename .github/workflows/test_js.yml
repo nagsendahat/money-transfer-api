@@ -1,0 +1,13 @@
+name: Test JS Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-runscope-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set environment variables from index.js
+        run: node index.js
+
