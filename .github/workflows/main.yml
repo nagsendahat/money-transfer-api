@@ -21,6 +21,6 @@ jobs:
             -H "Content-Type: application/json")
           echo "$response"
           echo "$GITHUB_ENV"
-          echo .
+          echo $.
       - name: Call Run Test JS
         uses: ./actions/run-runscope-bucket/@main
