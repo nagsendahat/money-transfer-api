@@ -9,5 +9,5 @@ jobs:
 
     steps:
       - name: Set environment variables from index.js
-        run: node index.js
+        run: node ./index.js
 
