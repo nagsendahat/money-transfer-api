@@ -23,4 +23,4 @@ jobs:
           echo "$GITHUB_ENV"
 
       - name: Call Run Test JS
-        uses: ./.github/workflows/test_js.yml
+        uses: ./action.yml
