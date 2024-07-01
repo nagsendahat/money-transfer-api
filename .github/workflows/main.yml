@@ -14,7 +14,7 @@ jobs:
           payload: |
             {
               "channel": "#testgithub",
-              "username": "github-actions",
+              "username": "dahat.shilpa@gmail.com",
               "text": "This is a test",
               "icon_emoji": ":octocat:"
             }
