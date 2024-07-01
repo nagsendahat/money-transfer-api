@@ -22,5 +22,15 @@ jobs:
           echo "$response"
           echo "$GITHUB_ENV"
           echo $.
-      - name: Call Run Test JS
-        uses: ./actions/run-runscope-bucket/@main
+      - name: Set up GitHub Actions Slack App
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          payload: |
+            {
+              "channel": "#testgithub",
+              "username": "github-actions",
+              "text": "This is a test",
+              "icon_emoji": ":octocat:"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${secrets.SLACK_WEBHOOK_URL}
