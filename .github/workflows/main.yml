@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Send message to Slack
         run: |
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"This is test \"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"Shilpa is Testing GitHub Action and Slack Integration!!!! \"}" ${{ secrets.SLACK_WEBHOOK_URL }}
