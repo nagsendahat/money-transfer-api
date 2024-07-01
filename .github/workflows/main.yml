@@ -4,19 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-runscope-test:
+  send-to-slack:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set up GitHub Actions Slack App
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
-          payload: |
-            {
-              "channel": "#testgithub",
-              "username": "dahat.shilpa@gmail.com",
-              "text": "This is a test",
-              "icon_emoji": ":octocat:"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${secrets.SLACK_WEBHOOK_URL}
+      - name: Send message to Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"This is test \"}" ${{ secrets.SLACK_WEBHOOK_URL }}
