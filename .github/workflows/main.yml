@@ -8,20 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Runscope Test
-        id: run_test
-        env:
-          RUNSCOPE_ACCESS_TOKEN: b27eb225-0b89-414e-9722-0c86d6155108
-          BUCKET_KEY: 69o51cj6r2ii
-          TEST_ID: b27eb225-0b89-414e-9722-0c86d6155108
-        run: |
-          response=$(curl -X GET \
-            https://api.runscope.com/radar/2eef4029-2134-4a1c-9c5a-6c5c8adee596/trigger?runscope_environment=b27eb225-0b89-414e-9722-0c86d6155108 \
-            -H "Authorization: Bearer $RUNSCOPE_ACCESS_TOKEN" \
-            -H "Content-Type: application/json")
-          echo "$response"
-          echo "$GITHUB_ENV"
-          echo $.
       - name: Set up GitHub Actions Slack App
         uses: slackapi/slack-github-action@v1.23.0
         with:
